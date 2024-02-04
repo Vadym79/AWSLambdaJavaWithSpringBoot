@@ -1,6 +1,0 @@
-micronaut:
-  application:
-    name: micronaut-products
-
-jackson:
-  serialization-inclusion: always
