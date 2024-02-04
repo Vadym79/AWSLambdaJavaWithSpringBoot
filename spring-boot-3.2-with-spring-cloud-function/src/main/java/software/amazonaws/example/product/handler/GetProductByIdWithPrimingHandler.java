@@ -3,6 +3,10 @@
 
 package software.amazonaws.example.product.handler;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -11,7 +15,9 @@ import org.crac.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.function.adapter.aws.FunctionInvoker;
 import org.springframework.stereotype.Component;
+
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
@@ -33,16 +39,38 @@ public class GetProductByIdWithPrimingHandler implements Function<APIGatewayProx
 	@Override
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
 		 logger.info("entered beforeCheckpoint method for priming");
-		 productDao.getProduct("0");
+		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(getAPIGatewayRequest().getBytes(StandardCharsets.UTF_8)), 
+				 new ByteArrayOutputStream(), new MockLambdaContext());
+		 //productDao.getProduct("0");
 	}
 
 	@Override
 	public void afterRestore(org.crac.Context<? extends Resource> context) throws Exception {	
 	
 	}
+	
+    
+	private static String getAPIGatewayRequest () {
+		StringBuilder sb = new StringBuilder();
+	    sb.append("{\n")
+		.append(" \"resource\": \"/productsWithPriming/{id}\",\n")
+		.append("  \"path\": \"/productsWithPriming/0\",\n")
+		.append("   \"httpMethod\": \"GET\",\n")
+		.append("   \"pathParameters\": {\n")
+		.append("      \"id\": \"0\"  \n")
+		.append(" }, \n")
+		.append("  \"requestContext\": {\n")
+		.append("     \"identity\": {\n")
+	    .append("          \"apiKey\": \"blabla\"\n")
+	    .append("      }\n")
+		.append(" }\n")
+		.append("}");
+	    return sb.toString();
+	}
 
 	@Override
 	public Optional<Product> apply(APIGatewayProxyRequestEvent event) {
+		logger.info("entered apply method ");
 		String id = event.getPathParameters().get("id");
 		Optional<Product> optionalProduct = productDao.getProduct(id);
 		if (optionalProduct.isPresent())
