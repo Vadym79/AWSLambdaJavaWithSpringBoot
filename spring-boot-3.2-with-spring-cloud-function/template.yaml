@@ -15,6 +15,8 @@ Globals:
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
     CodeUri: target/aws-spring-boot-3.2-spring-cloud-function-1.0.0-SNAPSHOT.jar
     Runtime: java21
+    SnapStart:
+      ApplyOn: PublishedVersions   
     Timeout: 30 
     MemorySize: 1024   
     Environment:
@@ -133,6 +135,32 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub "/aws/lambda/${GetProductByIdFunction}"
+      RetentionInDays: 7
+
+
+  GetProductByIdWithPrimingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithPrimingHandler
+      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunctionAndPriming
+      AutoPublishAlias: liveVersion
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTable
+      Events:
+        GetRequestById:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /productsWithPriming/{id}
+            Method: get            
+
+  GetProductByIdWithPrimingFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithPrimingFunction}"
       RetentionInDays: 7
 
  
