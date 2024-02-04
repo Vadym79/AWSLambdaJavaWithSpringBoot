@@ -3,34 +3,25 @@
 
 package software.amazonaws.example.product.dao;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazonaws.example.product.entity.Product;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-
 public class ProductMapper {
 
-  private static final String PK = "PK"; 
-  private static final String NAME = "name";
-  private static final String PRICE = "price";
+	private static final String PK = "PK";
+	private static final String NAME = "name";
+	private static final String PRICE = "price";
 
-  public static Product productFromDynamoDB(Map<String, AttributeValue> items) {
-    Product product = new Product();
-    product.setId(items.get(PK).s());
-    product.setName(items.get(NAME).s());
-    product.setPrice(new BigDecimal(items.get(PRICE).n()));
+	public static Product productFromDynamoDB(Map<String, AttributeValue> items) {
+		return new Product(items.get(PK).s(), items.get(NAME).s(), new BigDecimal(items.get(PRICE).n()));
+	}
 
-    return product;
-  }
-
-  public static Map<String, AttributeValue> productToDynamoDb(Product product) {
-    Map<String, AttributeValue> item = new HashMap<>();
-    item.put(PK, AttributeValue.builder().s(product.getId()).build());
-    item.put(NAME, AttributeValue.builder().s(product.getName()).build());
-    item.put(PRICE, AttributeValue.builder().n(product.getPrice().toString()).build());
-
-    return item;
-  }
+	public static Map<String, AttributeValue> productToDynamoDb(Product product) {
+		return Map.of(PK, AttributeValue.builder().s(product.id()).build(), NAME,
+				AttributeValue.builder().s(product.name()).build(), PRICE,
+				AttributeValue.builder().n(product.price().toString()).build());
+	}
 }
