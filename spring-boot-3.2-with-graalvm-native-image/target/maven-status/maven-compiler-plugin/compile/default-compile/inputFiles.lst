@@ -1,9 +1,0 @@
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\dao\ProductMapper.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\handler\CreateProductHandler.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\entity\Products.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\ApplicationConfiguration.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\Application.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\dao\DynamoProductDao.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\entity\Product.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\dao\ProductDao.java
-C:\Users\v.kazulkin\Documents\Java_Repos\aws-lambda-snap-start\spring-boot-3.2-with-GraalVM-native-image\src\main\java\software\amazonaws\example\product\handler\GetProductByIdHandler.java
