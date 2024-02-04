@@ -1,0 +1,9 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "AWSSpringBoot32LambdaSpringCloudFunction"
+resolve_s3 = true
+s3_prefix = "AWSSpringBoot32LambdaSpringCloudFunction"
+region = "eu-central-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Stage=\"prod\""
+image_repositories = []

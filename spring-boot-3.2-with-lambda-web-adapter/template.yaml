@@ -1,0 +1,185 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWSLambdaSpringBootJavaWithLambdaWebAdapterTest
+  Sample SAM Template 
+
+Parameters:
+  Stage:
+    Type: String
+    Default: prod
+    
+Globals:
+  Function:
+    Handler: run.sh
+    CodeUri: target/aws-spring-boot-3.2-lambda-web-adapter-1.0.0-SNAPSHOT.jar
+    Runtime: java21
+    Timeout: 30 
+    MemorySize: 1024
+    SnapStart:
+      ApplyOn: PublishedVersions      
+    Environment:
+      Variables:
+        JAVA_TOOL_OPTIONS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+        PRODUCT_TABLE_NAME: !Ref ProductsTable
+        RUST_LOG: info
+        REMOVE_BASE_PATH: /v1
+        AWS_LAMBDA_EXEC_WRAPPER: /opt/bootstrap
+
+Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    DependsOn: MyApiCWLRoleArn 
+    Properties:
+      StageName: !Ref Stage
+      Name: AWSLambdaSpringBoot32JavaWithLambdaWebAdapterAPI
+      Description: Api for AWSLambdaSpringBoot32JavaWithLambdaWebAdapter
+      AccessLogSetting:
+        DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
+        Format: "{'integrationLatency':'$context.integrationLatency', 'latency':'$context.responseLatency', 'requestId':'$context.requestId', 'ip': '$context.identity.sourceIp', 'caller':'$context.identity.caller', 'user':'$context.identity.user','requestTime':'$context.requestTime', 'xrayTraceId':'$context.xrayTraceId', 'wafResponseCode':'$context.wafResponseCode', 'httpMethod':'$context.httpMethod','resourcePath':'$context.resourcePath', 'status':'$context.status','protocol':'$context.protocol', 'responseLength':'$context.responseLength' }"
+      #MethodSettings:
+       # - MetricsEnabled: True
+       #   ResourcePath: '/*'
+       #   HttpMethod: '*'
+      Auth:
+        ApiKeyRequired: true  # sets for all methods
+
+
+  MyApiCWLRoleArn:
+   Type: AWS::ApiGateway::Account
+   Properties: 
+      CloudWatchRoleArn: !GetAtt CloudWatchRole.Arn
+      
+  # IAM Role for API GW + CWL
+  CloudWatchRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+        Path: /
+        ManagedPolicyArns:
+          - 'arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs'         
+        
+  MyApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+       LogGroupName: !Sub "/aws/apigateway/${MyApi}"
+       RetentionInDays: 7
+
+
+  MyApiUsagePlan:
+     Type: AWS::ApiGateway::UsagePlan
+     DependsOn:  
+        - MyApiStage
+     Properties:
+      ApiStages: 
+        - ApiId: !Ref MyApi
+          Stage: !Ref Stage
+      UsagePlanName: AWSLambdaSpringBoot32JavaWithLambdaWebAdapterAPIUsagePlan
+      Description: Usage plan for AWSLambdaSpringBoot32JavaWithLambdaWebAdapterAPI
+      Quota:
+          Limit: 2000000
+          Period: DAY
+      Throttle:
+          RateLimit:  10000
+          BurstLimit: 50000   
+
+  MyApiKey: 
+    Type: AWS::ApiGateway::ApiKey
+    DependsOn:  
+       - MyApiStage
+    Properties: 
+      Name: "AWSLambdaSpringBoot32JavaWithLambdaWebAdapterApiKey"
+      Description: "AWSLambdaSpringBoot32WithLambdaWebAdapter API Key"
+      Enabled: true
+      GenerateDistinctId: false
+      Value: a6ZbcDefQW12BN56WED2
+      StageKeys:
+        - RestApiId: !Ref MyApi
+          StageName: !Ref Stage
+
+  MyApiUsagePlanKey:
+      Type: "AWS::ApiGateway::UsagePlanKey"
+      DependsOn: 
+      - MyApi
+      Properties:
+        KeyId: !Ref MyApiKey
+        KeyType: API_KEY
+        UsagePlanId: !Ref MyApiUsagePlan
+
+ 
+  GetProductByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetProductByIdWithSpringBoot32WithLambdaWebAdapter
+      AutoPublishAlias: liveVersion
+      Layers:
+        - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:20
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTable
+      Events:
+        GetRequestById:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /v1/products/{id}
+            Method: get            
+
+  GetProductByIdFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdFunction}"
+      RetentionInDays: 7
+
+ 
+  PutProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PutProductWithSpringBoot32WithLambdaWebAdapter
+      Layers:
+        - !Sub arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:20
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTable
+      Events:
+        PutRequest:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /v1/products
+            Method: put
+
+  PutProductFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${PutProductFunction}"
+      RetentionInDays: 7
+
+  ProductsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "AWSLambdaSpringBoot32JavaWithLambdaWebAdapterProductsTable"
+      PointInTimeRecoverySpecification:
+         PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: 'PK'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'PK'
+          KeyType: 'HASH'
+      BillingMode: PAY_PER_REQUEST    
+      #ProvisionedThroughput: 
+        #ReadCapacityUnits: "1"
+        #WriteCapacityUnits: "1"
+      
+
+Outputs:
+  AWSLambdaJavaSpringBootWithLambdaWebAdapterApiEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda Java Snap Start"
+    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/products"
