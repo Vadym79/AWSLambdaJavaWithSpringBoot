@@ -1,0 +1,10 @@
+software\amazonaws\example\product\entity\Products.class
+software\amazonaws\example\product\handler\CreateProductHandler.class
+software\amazonaws\ApplicationConfiguration$ApplicationRuntimeHintsRegistrar.class
+software\amazonaws\example\product\handler\GetProductByIdHandler.class
+software\amazonaws\Application.class
+software\amazonaws\example\product\dao\ProductMapper.class
+software\amazonaws\example\product\entity\Product.class
+software\amazonaws\example\product\dao\ProductDao.class
+software\amazonaws\ApplicationConfiguration.class
+software\amazonaws\example\product\dao\DynamoProductDao.class
