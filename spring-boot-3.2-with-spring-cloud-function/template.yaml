@@ -138,13 +138,13 @@ Resources:
       RetentionInDays: 7
 
 
-  GetProductByIdWithPrimingFunction:
+  GetProductByIdWithDynamoDBRequestPrimingFunction:
     Type: AWS::Serverless::Function
     Properties:
       Environment:
         Variables:
-           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithPrimingHandler
-      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunctionAndPriming
+           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithDynamoDBRequestPrimingHandler
+      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunctionAndDynamoDBRequestPriming
       AutoPublishAlias: liveVersion
       Policies:
         - DynamoDBReadPolicy:
@@ -154,14 +154,41 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref MyApi
-            Path: /productsWithPriming/{id}
+            Path: /productsWithDynamoDBPriming/{id}
             Method: get            
 
-  GetProductByIdWithPrimingFunctionLogGroup:
+  GetProductByIdWithDynamoDBRequestPrimingFunctionLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithPrimingFunction}"
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithDynamoDBRequestPrimingFunction}"
       RetentionInDays: 7
+      
+      
+  GetProductByIdWithWebRequestPrimingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+           SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithWebRequestPrimingHandler
+      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunctionAndWebRequestPriming
+      AutoPublishAlias: liveVersion
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTable
+      Events:
+        GetRequestById:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /productsWithWebRequestPriming/{id}
+            Method: get            
+
+  GetProductByIdWithWebRequestPrimingFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${GetProductByIdWithWebRequestPrimingFunction}"
+      RetentionInDays: 7
+ 
 
  
   PutProductFunction:

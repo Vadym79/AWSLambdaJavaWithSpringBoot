@@ -6,7 +6,6 @@ package software.amazonaws.example.product.handler;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -18,21 +17,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.function.adapter.aws.FunctionInvoker;
 import org.springframework.stereotype.Component;
 
-
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
 import software.amazonaws.example.product.dao.DynamoProductDao;
 import software.amazonaws.example.product.entity.Product;
 
 @Component
-public class GetProductByIdWithPrimingHandler implements Function<APIGatewayProxyRequestEvent, Optional<Product>>, Resource {
+public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIGatewayProxyRequestEvent, Optional<Product>>, Resource {
 
 	@Autowired
 	private DynamoProductDao productDao;
 	
-    private static final Logger logger = LoggerFactory.getLogger(GetProductByIdWithPrimingHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(GetProductByIdWithWebRequestPrimingHandler.class);
 	
-	public GetProductByIdWithPrimingHandler () {
+	public GetProductByIdWithWebRequestPrimingHandler () {
 		Core.getGlobalContext().register(this);
 	}
 	
@@ -41,7 +39,6 @@ public class GetProductByIdWithPrimingHandler implements Function<APIGatewayProx
 		 logger.info("entered beforeCheckpoint method for priming");
 		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(getAPIGatewayRequest().getBytes(StandardCharsets.UTF_8)), 
 				 new ByteArrayOutputStream(), new MockLambdaContext());
-		 //productDao.getProduct("0");
 	}
 
 	@Override
