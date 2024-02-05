@@ -118,7 +118,7 @@ Resources:
       Environment:
         Variables:
            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdHandler
-      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunction
+      FunctionName: GetProductByIdWithSpringBoot32SCF
       AutoPublishAlias: liveVersion
       Policies:
         - DynamoDBReadPolicy:
@@ -144,7 +144,7 @@ Resources:
       Environment:
         Variables:
            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithDynamoDBRequestPrimingHandler
-      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunctionAndDynamoDBRequestPriming
+      FunctionName: GetProductByIdWithSpringBoot32SCFAndDynamoDBRequestPriming
       AutoPublishAlias: liveVersion
       Policies:
         - DynamoDBReadPolicy:
@@ -170,7 +170,7 @@ Resources:
       Environment:
         Variables:
            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdWithWebRequestPrimingHandler
-      FunctionName: GetProductByIdWithSpringBoot32SpringCloudFunctionAndWebRequestPriming
+      FunctionName: GetProductByIdWithSpringBoot32SCFAndWebRequestPriming
       AutoPublishAlias: liveVersion
       Policies:
         - DynamoDBReadPolicy:
