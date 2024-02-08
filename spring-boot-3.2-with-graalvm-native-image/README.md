@@ -15,9 +15,14 @@ sudo dnf install gcc glibc-devel zlib-devel libstdc++-static
 
 5) Install Maven  (https://docs.aws.amazon.com/cloud9/latest/user-guide/sample-java.html#sample-java-sdk-maven)
 
-sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
-sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
-sudo yum install -y apache-maven
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
+tar -xvf apache-maven-3.8.5-bin.tar.gz
+sudo mv apache-maven-3.8.5 /opt/
+
+
+M2_HOME='/opt/apache-maven-3.8.5'
+PATH="$M2_HOME/bin:$PATH"
+export PATH
 
 6) Clone git Repo
 git clone https://github.com/Vadym79/AWSLambdaJavaSnapStart.git
