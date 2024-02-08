@@ -10,8 +10,7 @@ Parameters:
     Default: prod
     
 Globals:
-  Function:
-  
+  Function:  
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
     CodeUri: target/function-native-zip.zip
     Runtime: provided.al2023

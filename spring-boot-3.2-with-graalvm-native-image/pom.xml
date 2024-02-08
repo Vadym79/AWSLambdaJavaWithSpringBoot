@@ -180,6 +180,10 @@
                   <artifactId>native-maven-plugin</artifactId>
                   <configuration>
                      <mainClass>software.amazonaws.Application</mainClass>
+                       <buildArgs>
+                         --enable-url-protocols=http
+                         -H:+AddAllCharsets
+                      </buildArgs>
                   </configuration>
                   <executions>
                      <execution>
