@@ -206,7 +206,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref MyApi
-            Path: /products/{id}
+            Path: /products
             Method: put
 
   PutProductFunctionLogGroup:
