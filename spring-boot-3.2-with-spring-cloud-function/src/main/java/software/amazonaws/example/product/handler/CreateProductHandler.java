@@ -28,14 +28,13 @@ public class CreateProductHandler implements Function<APIGatewayProxyRequestEven
   @Autowired 
   private ObjectMapper objectMapper;
   
-  private static final Logger logger = LoggerFactory.getLogger(CreateProductHandler.class);
-
   @Override
   public APIGatewayProxyResponseEvent apply(APIGatewayProxyRequestEvent requestEvent) {
 		try {
 			String requestBody = requestEvent.getBody();
 			Product product = objectMapper.readValue(requestBody, Product.class);
 			productDao.putProduct(product);
+			
 			return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.CREATED)
 					.withBody("Product with id = " + product.id() + " created");
 		} catch (Exception e) {
