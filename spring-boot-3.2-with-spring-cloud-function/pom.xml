@@ -212,25 +212,6 @@
                      </execution>
                   </executions>
                </plugin>
-               <plugin>
-                  <artifactId>maven-assembly-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <id>native-zip</id>
-                        <phase>package</phase>
-                        <goals>
-                           <goal>single</goal>
-                        </goals>
-                        <inherited>false</inherited>
-                     </execution>
-                  </executions>
-                  <configuration>
-                     <finalName>function</finalName>
-                     <descriptors>
-                        <descriptor>src/assembly/native.xml</descriptor>
-                     </descriptors>
-                  </configuration>
-               </plugin>
             </plugins>
          </build>
       </profile>

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd ${LAMBDA_TASK_ROOT:-.}
-
-./aws-spring-boot-3.2-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
