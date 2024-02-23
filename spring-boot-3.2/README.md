@@ -1,1 +1,0 @@
-View https://github.com/Vadym79/AWSLambdaJavaSnapStart/tree/main/spring-boot-3.2 repo for the complete sample application
