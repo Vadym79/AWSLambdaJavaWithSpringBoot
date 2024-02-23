@@ -1,0 +1,1 @@
+For the full example visit this repository https://github.com/Vadym79/AWSLambdaJavaSnapStart/tree/main/spring-boot-3.2
