@@ -235,5 +235,5 @@ Resources:
 
 Outputs:
   AWSLambdaJavaSpringBootSnapStartApiEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda Java Snap Start"
+    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda"
     Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/products"

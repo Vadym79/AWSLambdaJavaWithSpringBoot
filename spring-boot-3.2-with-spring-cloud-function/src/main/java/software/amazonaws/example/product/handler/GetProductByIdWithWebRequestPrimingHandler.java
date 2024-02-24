@@ -69,6 +69,8 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 		.append("}");
 	    return sb.toString();
 	}
+	
+
 
 	@Override
 	public APIGatewayProxyResponseEvent apply(APIGatewayProxyRequestEvent requestEvent) {
