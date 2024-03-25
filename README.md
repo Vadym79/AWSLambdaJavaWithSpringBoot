@@ -52,4 +52,6 @@ SnapStart doesn't currently work for AWS Custom Runtimes, so for GraalVM Native 
 
 ## Further Readings 
 
-You can read my article series "AWS Lambda SnapStart" on https://dev.to/vkazulkin/measuring-java-11-lambda-cold-starts-with-snapstart-part-1-first-impressions-30a4
+My article series ["Spring Boot 3 application on AWS Lambda"](https://dev.to/aws-builders/spring-boot-3-application-on-aws-lambda-part-1-introduction-to-the-series-2m5g)
+
+My article series ["AWS Lambda SnapStart"](https://dev.to/vkazulkin/measuring-java-11-lambda-cold-starts-with-snapstart-part-1-first-impressions-30a4)
