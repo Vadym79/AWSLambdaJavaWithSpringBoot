@@ -43,7 +43,7 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	@Override
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
 		 logger.info("entered beforeCheckpoint method for priming");
-		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(getAPIGatewayRequest().getBytes(StandardCharsets.UTF_8)), 
+		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(getAPIGatewayRequestMultiLine().getBytes(StandardCharsets.UTF_8)), 
 				 new ByteArrayOutputStream(), new MockLambdaContext());
 	}
 
@@ -70,6 +70,23 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	    return sb.toString();
 	}
 	
+	private static String getAPIGatewayRequestMultiLine () {
+		 return  """
+		 		{
+		          "resource": "/productsWithPriming/{id}",
+		          "path":  "/productsWithPriming/0\",
+		          "httpMethod": "GET",
+		          "pathParameters": {
+		                "id": "0" 
+		            },
+		           "requestContext": {
+		              "identity": {
+	                  "apiKey": "blabla"
+	                }
+		          }
+		        }
+	     """;
+	}
 
 
 	@Override
@@ -82,7 +99,7 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 				return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.NOT_FOUND)
 						.withBody("Product with id = " + id + " not found");
 			}
-			logger.info(" product " + optionalProduct.get() + " not found ");
+			logger.info(" product " + optionalProduct.get() + " found ");
 			return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.OK)
 					.withBody(objectMapper.writeValueAsString(optionalProduct.get()));
 		} catch (Exception je) {
@@ -91,5 +108,6 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 					.withBody("Internal Server Error :: " + je.getMessage());
 		}
 	}
+
 
 }
