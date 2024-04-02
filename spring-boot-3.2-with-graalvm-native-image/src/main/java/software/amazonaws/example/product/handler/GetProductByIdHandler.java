@@ -39,7 +39,7 @@ public class GetProductByIdHandler implements Function<APIGatewayProxyRequestEve
 				return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.NOT_FOUND)
 						.withBody("Product with id = " + id + " not found");
 			}
-			logger.info(" product " + optionalProduct.get() + " not found ");
+			logger.info(" product " + optionalProduct.get() + " found ");
 			return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.OK)
 					.withBody(objectMapper.writeValueAsString(optionalProduct.get()));
 		} catch (Exception je) {
