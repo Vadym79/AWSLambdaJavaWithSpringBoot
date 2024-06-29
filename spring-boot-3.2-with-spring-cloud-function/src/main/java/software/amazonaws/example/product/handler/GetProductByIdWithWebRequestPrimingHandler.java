@@ -73,8 +73,8 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	private static String getAPIGatewayRequestMultiLine () {
 		 return  """
 		 		{
-		          "resource": "/productsWithPriming/{id}",
-		          "path":  "/productsWithPriming/0\",
+		          "resource": "/products/{id}",
+		          "path":  "/products/0",
 		          "httpMethod": "GET",
 		          "pathParameters": {
 		                "id": "0" 
