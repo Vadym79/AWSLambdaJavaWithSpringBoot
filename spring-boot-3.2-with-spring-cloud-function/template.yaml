@@ -15,8 +15,8 @@ Globals:
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
     CodeUri: target/aws-spring-boot-3.2-spring-cloud-function-1.0.0-SNAPSHOT.jar
     Runtime: java21
-    SnapStart:
-      ApplyOn: PublishedVersions   
+    #SnapStart:
+      #ApplyOn: PublishedVersions   
     Timeout: 30 
     MemorySize: 1024   
     Environment:

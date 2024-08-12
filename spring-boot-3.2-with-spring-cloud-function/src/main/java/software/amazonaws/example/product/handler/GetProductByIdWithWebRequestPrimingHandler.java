@@ -52,11 +52,12 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	
 	}
 	
+	/*
 	private static String getAPIGatewayRequest () {
 		StringBuilder sb = new StringBuilder();
 	    sb.append("{\n")
-		.append(" \"resource\": \"/productsWithPriming/{id}\",\n")
-		.append("  \"path\": \"/productsWithPriming/0\",\n")
+		.append(" \"resource\": \"/products/{id}\",\n")
+		.append("  \"path\": \"/products/0\",\n")
 		.append("   \"httpMethod\": \"GET\",\n")
 		.append("   \"pathParameters\": {\n")
 		.append("      \"id\": \"0\"  \n")
@@ -69,6 +70,7 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 		.append("}");
 	    return sb.toString();
 	}
+	*/
 	
 	private static String getAPIGatewayRequestMultiLine () {
 		 return  """
