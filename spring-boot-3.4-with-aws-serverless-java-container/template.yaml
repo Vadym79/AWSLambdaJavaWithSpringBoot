@@ -11,15 +11,15 @@ Parameters:
     
 Globals:
   Function:
-    Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
-    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithDynamoDBRequestPriming::handleRequest
+    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
+    Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithDynamoDBRequestPriming::handleRequest
     #Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithWebRequestPriming::handleRequest
     CodeUri: target/aws-lambda-spring-boot-3.4-aws-serverless-java-container-1.0.0-SNAPSHOT.jar
     Runtime: java21
     Timeout: 30 
     MemorySize: 1024
-    #SnapStart:
-      #ApplyOn: PublishedVersions      
+    SnapStart:
+      ApplyOn: PublishedVersions      
     Environment:
       Variables:
         #JAVA_TOOL_OPTIONS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
@@ -139,6 +139,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: PutProductWithSpringBoot34WithAWSServerlessJavaContainer
+      AutoPublishAlias: liveVersion
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
