@@ -20,6 +20,7 @@ public class Application {
 
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
+	
 	@Autowired
 	private DynamoProductDao productDao;
 
@@ -27,6 +28,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+    
 	@PostConstruct
 	public void doPriming() {
 		logger.info("entered do priming method ");
