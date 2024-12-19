@@ -18,25 +18,20 @@ import software.amazonaws.example.product.dao.DynamoProductDao;
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 public class Application {
 
-	/*
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
 	@Autowired
 	private DynamoProductDao productDao;
-    */
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
 
-	/*
 	@PostConstruct
 	public void doPriming() {
 		logger.info("entered do priming method ");
 		productDao.getProduct("0");
 		logger.info("finished do priming method ");
 	}
-	*/
 
 }

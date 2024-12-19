@@ -16,11 +16,11 @@ Globals:
     Runtime: java21
     Timeout: 30 
     MemorySize: 1024
-    SnapStart:
-      ApplyOn: PublishedVersions      
+    #SnapStart:
+      #ApplyOn: PublishedVersions      
     Environment:
       Variables:
-        JAVA_TOOL_OPTIONS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+        #JAVA_TOOL_OPTIONS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
         PRODUCT_TABLE_NAME: !Ref ProductsTable
         RUST_LOG: info
         REMOVE_BASE_PATH: /v1
