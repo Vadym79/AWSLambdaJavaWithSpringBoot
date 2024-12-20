@@ -13,8 +13,6 @@ Globals:
   Function:
     Timeout: 30 
     MemorySize: 1024
-    SnapStart:
-      ApplyOn: PublishedVersions       
     Environment:
       Variables:
         #JAVA_TOOL_OPTIONS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
@@ -92,7 +90,7 @@ Resources:
       Description: "AWSLambdaAsDockerImageSpringBoot34AWSServerlessJavaContainer API Key"
       Enabled: true
       GenerateDistinctId: false
-      Value: a6ZbcDefQW12BN56WEI34
+      Value: a6ZbcDefQW12BN56WEZ34
       StageKeys:
         - RestApiId: !Ref MyApi
           StageName: !Ref Stage
@@ -111,10 +109,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-with-aws-serverless-java-container-as-lambda-docker-image:v1
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-and-aws-serverless-java-container-as-lambda-docker-image:v1
       ImageConfig:
         Command: ["software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest"]
-      FunctionName: GetProductByIdWithSpringBoot34WithAWSServerlessJavaContainerAsDocker
+      FunctionName: GetProductByIdWithSpringBoot34WithAWSServerlessJavaContainerAsDI
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref ProductsTable
@@ -137,10 +135,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-with-aws-serverless-java-container-as-lambda-docker-image:v1
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-and-aws-serverless-java-container-as-lambda-docker-image:v1
       ImageConfig:
         Command: ["software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest"]
-      FunctionName: PutProductWithSpringBoot34WithAWSServerlessJavaContainerAsDocker
+      FunctionName: PutProductWithSpringBoot34WithAWSServerlessJavaContainerAsDI
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
