@@ -2,4 +2,4 @@
 
 cd ${LAMBDA_TASK_ROOT:-.}
 
-./aws-spring-boot-3.2-graalvm-native-image -Dlogging.level.org.springframework=DEBUG
+./aws-lambda-as-graavlvm-native-image-spring-boot-3.4-spring-cloud-function-aws -Dlogging.level.org.springframework=DEBUG
