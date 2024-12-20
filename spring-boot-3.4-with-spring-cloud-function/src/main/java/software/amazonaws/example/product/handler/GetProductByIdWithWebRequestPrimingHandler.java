@@ -75,8 +75,8 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	private static String getAPIGatewayRequestMultiLine () {
 		 return  """
 		 		{
-		          "resource": "/products/{id}",
-		          "path":  "/products/0",
+		          "resource": "/productsWithWebRequestPriming/{id}",
+		          "path":  "/productsWithWebRequestPriming/0",
 		          "httpMethod": "GET",
 		          "pathParameters": {
 		                "id": "0" 
@@ -97,7 +97,7 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 		Optional<Product> optionalProduct = productDao.getProduct(id);
 		try {
 			if (optionalProduct.isEmpty()) {
-				logger.info(" product with id " + id + "not found ");
+				logger.info(" product with id " + id + " not found ");
 				return new APIGatewayProxyResponseEvent().withStatusCode(HttpStatusCode.NOT_FOUND)
 						.withBody("Product with id = " + id + " not found");
 			}

@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  AWS Lambda SpringBoot 3.4 Spring Cloud Function AWS Adapter
+  AWS Lambda SpringBoot 3.4 with Spring Cloud Function AWS Adapter
   Sample SAM Template 
 
 Parameters:
@@ -11,7 +11,6 @@ Parameters:
     
 Globals:
   Function:
-  
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
     CodeUri: target/aws-lambda-spring-boot-3.4-spring-cloud-function-aws-1.0.0-SNAPSHOT.jar
     Runtime: java21
@@ -32,7 +31,7 @@ Resources:
     Properties:
       StageName: !Ref Stage
       Name: AWSLambdaSpringBoot34SpringCloudFunctionAWSAPI
-      Description: Product API using AWS Lambda Spring Boot 3.4.Spring Cloud Function AWS Adapter
+      Description: Product API using AWS Lambda with Spring Boot 3.4 and Spring Cloud Function AWS Adapter
       AccessLogSetting:
         DestinationArn: !Sub ${MyApiLogGroup.Arn} # This Log Group is already created within our SAM Template
         Format: "{'integrationLatency':'$context.integrationLatency', 'latency':'$context.responseLatency', 'requestId':'$context.requestId', 'ip': '$context.identity.sourceIp', 'caller':'$context.identity.caller', 'user':'$context.identity.user','requestTime':'$context.requestTime', 'xrayTraceId':'$context.xrayTraceId', 'wafResponseCode':'$context.wafResponseCode', 'httpMethod':'$context.httpMethod','resourcePath':'$context.resourcePath', 'status':'$context.status','protocol':'$context.protocol', 'responseLength':'$context.responseLength' }"
@@ -236,5 +235,5 @@ Resources:
 
 Outputs:
   AWSLambdaSpringBoot34WithSpringCloudFunctionAWSApiEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda Spring Boot 3.4 Spring Cloud Function AWS Adapter"
+    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda Spring Boot 3.4 with Spring Cloud Function AWS Adapter"
     Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/products"
