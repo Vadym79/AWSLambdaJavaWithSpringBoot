@@ -11,9 +11,6 @@ Parameters:
     
 Globals:
   Function:
-  
-    Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
-    Runtime: java21
     Timeout: 30 
     MemorySize: 1024   
     Environment:
@@ -114,10 +111,9 @@ Resources:
     Properties:
     Properties:
       PackageType: Image
-      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/aws-lambda-spring-boot-3.4-docker-image:v1
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-with-spring-cloud-function-as-lambda-docker-image:v1
       ImageConfig:
         Command: ["org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest"]
-
       Environment:
         Variables:
            SPRING_CLOUD_FUNCTION_DEFINITION: getProductByIdHandler
@@ -144,10 +140,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/aws-lambda-spring-boot-3.4-docker-image:v1
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-with-spring-cloud-function-as-lambda-docker-image:v1
       ImageConfig:
         Command: ["org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest"]
-
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: createProductHandler
