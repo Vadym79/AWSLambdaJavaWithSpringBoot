@@ -109,7 +109,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-and-aws-serverless-java-container-as-lambda-docker-image:v1
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-with-aws-serverless-java-container-as-lambda-docker-image:v1
       ImageConfig:
         Command: ["software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest"]
       FunctionName: GetProductByIdWithSpringBoot34WithAWSServerlessJavaContainerAsDI
@@ -135,7 +135,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-and-aws-serverless-java-container-as-lambda-docker-image:v1
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.eu-central-1.amazonaws.com/spring-boot-3.4-with-aws-serverless-java-container-as-lambda-docker-image:v1
       ImageConfig:
         Command: ["software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest"]
       FunctionName: PutProductWithSpringBoot34WithAWSServerlessJavaContainerAsDI
