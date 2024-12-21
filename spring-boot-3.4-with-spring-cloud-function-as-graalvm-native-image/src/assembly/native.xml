@@ -23,6 +23,7 @@
 			<fileMode>0775</fileMode>
 			<includes>
 				<include>aws-lambda-as-graavlvm-native-image-spring-boot-3.4-spring-cloud-function-aws</include>
+				<include>libaws-crt-jni.so</include>
 			</includes>
 		</fileSet>
 	</fileSets>
