@@ -31,7 +31,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
-			    <exclusion>
+				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
@@ -54,6 +54,10 @@
 					<groupId>software.amazon.awssdk</groupId>
 					<artifactId>netty-nio-client</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>software.amazon.awssdk</groupId>
+					<artifactId>apache-client</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -66,10 +70,26 @@
 			<artifactId>aws-lambda-java-events</artifactId>
 			<version>3.14.0</version>
 		</dependency>
-		<dependency>
+		<!--
+	  <dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>apache-client</artifactId>
+	  </dependency>
+      -->
+		<!--
+	  <dependency>
+			<groupId>software.amazon.awssdk.crt</groupId>
+			<artifactId>aws-crt</artifactId>
+			<version>0.33.7</version>
+			<classifier>linux-x86_64</classifier>
 		</dependency>
+        -->
+
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>aws-crt-client</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
