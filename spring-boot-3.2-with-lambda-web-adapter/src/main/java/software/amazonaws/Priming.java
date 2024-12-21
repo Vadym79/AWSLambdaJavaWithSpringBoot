@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 
 import software.amazonaws.example.product.dao.DynamoProductDao;
 
-@Configuration
+//@Configuration
 public class Priming implements Resource {
 
-	@Autowired
+	//@Autowired
 	private DynamoProductDao productDao;
 
 	private static final Logger logger = LoggerFactory.getLogger(Priming.class);
