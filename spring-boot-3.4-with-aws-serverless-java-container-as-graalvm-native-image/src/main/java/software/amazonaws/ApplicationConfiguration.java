@@ -13,12 +13,14 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
 import software.amazonaws.example.product.entity.Product;
 import software.amazonaws.example.product.entity.Products;
+import software.amazonaws.example.product.handler.StreamLambdaHandler;
+
 import static org.springframework.aot.hint.MemberCategory.*;
 
 @Configuration
 @RegisterReflectionForBinding({DateTime.class, APIGatewayProxyRequestEvent.class, HashSet.class, 
 	APIGatewayProxyRequestEvent.ProxyRequestContext.class, APIGatewayProxyRequestEvent.RequestIdentity.class,
-	Product.class, Products.class})
+	Product.class, Products.class, StreamLambdaHandler.class})
 
 @ImportRuntimeHints(ApplicationConfiguration.ApplicationRuntimeHintsRegistrar.class)
 
