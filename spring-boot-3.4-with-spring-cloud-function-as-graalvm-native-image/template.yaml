@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  AWS Lambda as GraalVM Native Image SpringBoot 3.4 Spring Cloud Function AWS Adapter
+  AWS Lambda as GraalVM Native Image SpringBoot 3.4 and Spring Cloud Function AWS Adapter
   Sample SAM Template 
 
 Parameters:

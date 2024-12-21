@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
-import software.amazon.awssdk.http.apache.ApacheHttpClient;
+import software.amazon.awssdk.http.crt.AwsCrtHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -27,7 +27,7 @@ import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
 import software.amazonaws.example.product.entity.Product;
 import software.amazonaws.example.product.entity.Products;
-  
+
 @Repository
 public class DynamoProductDao implements ProductDao {
   private static final Logger logger = LoggerFactory.getLogger(DynamoProductDao.class);
@@ -38,7 +38,8 @@ public class DynamoProductDao implements ProductDao {
     .region(Region.EU_CENTRAL_1)
     .overrideConfiguration(ClientOverrideConfiguration.builder()
       .build())
-    .httpClient(ApacheHttpClient.builder().build())
+    //.httpClient(ApacheHttpClient.builder().build())
+    .httpClient(AwsCrtHttpClient.builder().build())
     .build();
 
   @Override
