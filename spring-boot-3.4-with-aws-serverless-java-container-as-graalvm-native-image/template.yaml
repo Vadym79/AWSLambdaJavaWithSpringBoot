@@ -92,7 +92,7 @@ Resources:
       Description: "AWSLambdaAsGraalVMNativeImageSpringBoot34AWSServerlessJavaContainer API Key"
       Enabled: true
       GenerateDistinctId: false
-      Value: a6ZbcDefQW12BN56WEZ34
+      Value: a6ZbcDefQW12BN56WEX34
       StageKeys:
         - RestApiId: !Ref MyApi
           StageName: !Ref Stage
