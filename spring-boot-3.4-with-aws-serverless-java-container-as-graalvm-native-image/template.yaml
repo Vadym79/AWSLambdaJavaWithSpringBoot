@@ -11,7 +11,6 @@ Parameters:
     
 Globals:
   Function:
-    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
     Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler 
     CodeUri: target/function-native-zip.zip
     Runtime: provided.al2023
