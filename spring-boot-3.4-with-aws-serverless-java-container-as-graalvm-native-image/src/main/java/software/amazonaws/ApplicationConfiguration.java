@@ -1,5 +1,9 @@
 package software.amazonaws;
 
+import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS;
+import static org.springframework.aot.hint.MemberCategory.INVOKE_PUBLIC_METHODS;
+import static org.springframework.aot.hint.MemberCategory.PUBLIC_FIELDS;
+
 import java.util.HashSet;
 
 import org.joda.time.DateTime;
@@ -13,14 +17,11 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
 import software.amazonaws.example.product.entity.Product;
 import software.amazonaws.example.product.entity.Products;
-import software.amazonaws.example.product.handler.StreamLambdaHandler;
-
-import static org.springframework.aot.hint.MemberCategory.*;
 
 @Configuration
 @RegisterReflectionForBinding({DateTime.class, APIGatewayProxyRequestEvent.class, HashSet.class, 
 	APIGatewayProxyRequestEvent.ProxyRequestContext.class, APIGatewayProxyRequestEvent.RequestIdentity.class,
-	Product.class, Products.class, StreamLambdaHandler.class})
+	Product.class, Products.class})
 
 @ImportRuntimeHints(ApplicationConfiguration.ApplicationRuntimeHintsRegistrar.class)
 

@@ -11,7 +11,8 @@ Parameters:
     
 Globals:
   Function:
-    Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
+    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
+    Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler 
     CodeUri: target/function-native-zip.zip
     Runtime: provided.al2023
     Timeout: 30 
@@ -19,6 +20,7 @@ Globals:
     Environment:
       Variables:
         PRODUCT_TABLE_NAME: !Ref ProductsTable
+        MAIN_CLASS: com.amazonaws.Application
 
 Resources:
   MyApi:
