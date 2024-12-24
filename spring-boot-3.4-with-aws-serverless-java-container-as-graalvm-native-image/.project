@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AWSLambdaAsGraalVMNativeImageImageWithSpringBoot3.4.AWSServerlessJavaContainer</name>
+	<name>AWSLambdaAsGraalVMNativeImageWithSpringBoot3.4.AWSServerlessJavaContainer</name>
 	<comment></comment>
 	<projects>
 	</projects>
