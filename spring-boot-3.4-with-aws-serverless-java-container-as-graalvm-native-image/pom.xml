@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>software.amazonaws.example</groupId>
 	<artifactId>
-		aws-lambda-as-graavlvm-native-image-spring-boot-3.4-aws-serveless-java-container</artifactId>
+		aws-lambda-as-graalvm-native-image-spring-boot-3.4-aws-serveless-java-container</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>${packaging}</packaging>
 	<properties>
