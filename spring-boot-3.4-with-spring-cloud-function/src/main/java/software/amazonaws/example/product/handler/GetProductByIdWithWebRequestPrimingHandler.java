@@ -6,6 +6,7 @@ package software.amazonaws.example.product.handler;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.ProxyRequestContext;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.RequestIdentity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import software.amazon.awssdk.http.HttpStatusCode;
@@ -43,7 +46,7 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	@Override
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
 		 logger.info("entered beforeCheckpoint method for priming");
-		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(getAPIGatewayRequestMultiLine().getBytes(StandardCharsets.UTF_8)), 
+		 new FunctionInvoker().handleRequest(new ByteArrayInputStream(this.getAPIGatewayProxyRequestEventAsJson().getBytes(StandardCharsets.UTF_8)), 
 				 new ByteArrayOutputStream(), new MockLambdaContext());
 	}
 
@@ -72,6 +75,7 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 	}
 	*/
 	
+	@SuppressWarnings("unused")
 	private static String getAPIGatewayRequestMultiLine () {
 		 return  """
 		 		{
@@ -89,6 +93,21 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
 		        }
 	     """;
 	}
+	
+    private String getAPIGatewayProxyRequestEventAsJson() throws Exception{
+    	final APIGatewayProxyRequestEvent proxyRequestEvent = new APIGatewayProxyRequestEvent ();
+    	proxyRequestEvent.setHttpMethod("GET");
+    	proxyRequestEvent.setPathParameters(Map.of("id","0"));
+        proxyRequestEvent.setResource("/productsWithWebRequestPriming/{id}");
+        proxyRequestEvent.setPath("/productsWithWebRequestPriming/0");
+    
+    	final ProxyRequestContext proxyRequestContext = new ProxyRequestContext();
+    	final RequestIdentity requestIdentity= new RequestIdentity();
+    	requestIdentity.setApiKey("blabla");
+    	proxyRequestContext.setIdentity(requestIdentity);
+    	proxyRequestEvent.setRequestContext(proxyRequestContext);
+    	return objectMapper.writeValueAsString(proxyRequestEvent);		
+    }
 
 
 	@Override
