@@ -1,8 +1,11 @@
 package software.amazonaws.example.product.handler;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.crac.Core;
@@ -61,8 +64,9 @@ public class StreamLambdaHandlerWithWebRequestPriming implements RequestStreamHa
 	public void beforeCheckpoint(org.crac.Context<? extends Resource> context) throws Exception {
 		 logger.info("Before Checkpoint");
 		 handler.proxy(getAwsProxyRequest(), new MockLambdaContext());
+		 
 		 /*
-		 handler.proxyStream(new ByteArrayInputStream(getAPIGatewayRequest().getBytes(StandardCharsets.UTF_8)), 
+		 handler.proxyStream(new ByteArrayInputStream(getAwsProxyRequest().getBytes(StandardCharsets.UTF_8)), 
 				 new ByteArrayOutputStream(), new MockLambdaContext());
 	     */
 		 logger.info("After Checkpoint"); 
@@ -74,15 +78,19 @@ public class StreamLambdaHandlerWithWebRequestPriming implements RequestStreamHa
 	}
 	
     private static AwsProxyRequest getAwsProxyRequest () {
+    	//AwsProxyHttpServletRequestReader
     	final AwsProxyRequest awsProxyRequest = new AwsProxyRequest ();
     	awsProxyRequest.setHttpMethod("GET");
     	awsProxyRequest.setPath("/products/0");
-    	awsProxyRequest.setResource("/products/{id}");
+    	//awsProxyRequest.setResource("/products/{id}");
     	awsProxyRequest.setPathParameters(Map.of("id","0"));
+    	
+    	
     	final AwsProxyRequestContext awsProxyRequestContext = new AwsProxyRequestContext();
     	final ApiGatewayRequestIdentity apiGatewayRequestIdentity= new ApiGatewayRequestIdentity();
     	apiGatewayRequestIdentity.setApiKey("blabla");
     	awsProxyRequestContext.setIdentity(apiGatewayRequestIdentity);
+    	
     	awsProxyRequest.setRequestContext(awsProxyRequestContext);
     	return awsProxyRequest;		
     }

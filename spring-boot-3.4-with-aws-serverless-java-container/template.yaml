@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  AWS Lambda SpringBoot 3.4 AWS Serverless Java Container Application
+  AWS Lambda SpringBoot 3.4 with AWS Serverless Java Container Application
   Sample SAM Template 
 
 Parameters:
@@ -12,8 +12,8 @@ Parameters:
 Globals:
   Function:
     #Handler: software.amazonaws.example.product.handler.StreamLambdaHandler::handleRequest
-    Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithDynamoDBRequestPriming::handleRequest
-    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithWebRequestPriming::handleRequest
+    #Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithDynamoDBRequestPriming::handleRequest
+    Handler: software.amazonaws.example.product.handler.StreamLambdaHandlerWithWebRequestPriming::handleRequest
     CodeUri: target/aws-lambda-spring-boot-3.4-aws-serverless-java-container-1.0.0-SNAPSHOT.jar
     Runtime: java21
     Timeout: 30 
@@ -177,5 +177,5 @@ Resources:
 
 Outputs:
   AWSLambdaSpringBoot34AWSServerlessJavaContainerAPIEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda Spring Boot 3.4 AWS Serverless Java Container"
+    Description: "API Gateway endpoint URL for Prod stage for AWS Lambda Spring Boot 3.4 with AWS Serverless Java Container"
     Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/products"
