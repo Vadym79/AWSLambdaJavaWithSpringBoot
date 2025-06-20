@@ -98,14 +98,17 @@ public class GetProductByIdWithWebRequestPrimingHandler implements Function<APIG
     	final APIGatewayProxyRequestEvent proxyRequestEvent = new APIGatewayProxyRequestEvent ();
     	proxyRequestEvent.setHttpMethod("GET");
     	proxyRequestEvent.setPathParameters(Map.of("id","0"));
-        proxyRequestEvent.setResource("/productsWithWebRequestPriming/{id}");
+        /*
+    	proxyRequestEvent.setResource("/productsWithWebRequestPriming/{id}");
         proxyRequestEvent.setPath("/productsWithWebRequestPriming/0");
     
+       
     	final ProxyRequestContext proxyRequestContext = new ProxyRequestContext();
     	final RequestIdentity requestIdentity= new RequestIdentity();
     	requestIdentity.setApiKey("blabla");
     	proxyRequestContext.setIdentity(requestIdentity);
     	proxyRequestEvent.setRequestContext(proxyRequestContext);
+    	*/
     	return objectMapper.writeValueAsString(proxyRequestEvent);		
     }
 
