@@ -1,4 +1,6 @@
-# Explore ways to run Spring Boot application with AWS Lambda Java or Customer Runtime with GraalVM Native Image  
+# Explore ways to develop, run and optimize Spring Boot application with AWS Lambda Java or Customer Runtime with GraalVM Native Image  
+
+Please follow my [Spring Boot 3 application on AWS Lambda](https://dev.to/vkazulkin/series/30408) article series 
 
 ## Architecture
 
